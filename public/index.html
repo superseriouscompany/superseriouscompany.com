@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Super Serious Company</title>
+    <meta property="description" content="Pithy, Poignant Tagline."/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <meta property="og:url"         content="http://superseriouscompany.com" />
+    <meta property="og:title"       content="Super Serious Company" />
+    <meta property="og:description" content="Pithy, Poignant Tagline." />
+    <meta property="og:image"       content="https://cldup.com/Kl5WvoFCg9.jpg" />
+    <style>
+      /* Globals */
+      * { box-sizing: border-box; }
+      body { font-family: 'Roboto', Helvetica, sans-serif; background: url(http://images.clipartpanda.com/business-clipart-cliparti1_business-clip-art_02.jpg) repeat; }
+
+      /* Page Layout */
+      section { padding: 0 2em 2em; }
+
+      /* Post */
+      .day .title { position: relative; }
+      .day img { width: 100%; }
+      .day h2  {
+        position: absolute;
+        width: 80%;
+        right: 0;
+        bottom: 10%;
+        background-color: rgba(0,0,0,0.2);
+        color: white;
+        text-shadow: 0 0 2px rgba(0,0,0,0.8);
+        border: 1px solid white;
+        border-width: 1px 0 1px 1px;
+        padding: 0.2em;
+      }
+      .day .quotes  { background: white; }
+      .day blockquote { margin: 0; padding: 0.5em; }
+
+      @media only screen and (min-width: 769px) {
+        .title { max-width: 800px; margin: 0 auto; display: block; }
+        .quotes { display: table; width: 100%; max-width: 800px; margin: 0 auto; }
+        .quotes blockquote { width: 50%; display: table-cell; }
+        blockquote p:first-child { margin-top: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      {{#days}}
+        <article class="day">
+          <div class="title">
+            <img src="{{imageUrl}}"/>
+            <h2>
+              {{portugueseTitle}}
+              <small>({{englishSubtitle}})</small>
+            </h2>
+          </div>
+          <div class="quotes">
+            <blockquote class="santi">
+              <p><strong>Santi:</strong></p>
+              {{{santi}}}
+            </blockquote>
+
+            <blockquote class="neil">
+              <p><strong>Neil:</strong></p>
+              {{{neil}}}
+            </blockquote>
+          </div>
+        </article>
+      {{/days}}
+    </section>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-83917648-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
