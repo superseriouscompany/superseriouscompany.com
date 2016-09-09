@@ -1,2 +1,2 @@
 # Super Serious Company Website
-#### Pithy, Poignant Tagline
+#### Pithy, Poignant Tagline.
