@@ -1,9 +1,13 @@
-var express  = require('express');
-var fs       = require('fs');
-var mustache = require('mustache');
-var app      = express();
+var express    = require('express');
+var fs         = require('fs');
+var mustache   = require('mustache');
+var bodyParser = require('body-parser');
+var app        = express();
 
-var template = fs.readFileSync('./public/index.html').toString();
+var mongoUrl = process.env.MONGODB_URI || ''
+
+var template      = fs.readFileSync('./public/index.html').toString();
+var adminTemplate = fs.readFileSync('./public/admin.html').toString();
 
 var days = [
   {
@@ -32,6 +36,15 @@ var days = [
 app.get('/', function(req, res) {
   var html = mustache.render(template, {days: days});
   res.send(html);
+})
+
+app.get('/biden', function(req, res) {
+  res.send(adminTemplate);
+})
+
+app.post('/days', bodyParser.urlencoded({extended: false}), function(req, res) {
+  console.log(req.body.santi, req.body.neil, 'nope');
+  res.json(req.body);
 })
 
 var port = process.env.PORT || 3000;
