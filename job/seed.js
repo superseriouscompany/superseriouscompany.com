@@ -10,7 +10,7 @@ client.connect('mongodb://heroku_n41dvcxp:tps295d6qk3aogkbqmrttluccn@ds029106.ml
 
     collection.insertMany([
       {
-        imageUrl: 'https://cldup.com/d_Q5Jnt466.jpg',
+        imageUrl: '/comic1.jpg',
         portugueseTitle: 'Dia Um',
         englishTitle: 'Day One',
         santi: `

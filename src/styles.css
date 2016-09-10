@@ -1,9 +1,18 @@
+/*
+  Colors:
+
+  #94796E Brown
+
+*/
+
 /* Globals */
 *    { box-sizing: border-box; }
-body { font-family: 'Roboto', Helvetica, sans-serif; }
+body { font-family: 'Questrial', Helvetica, sans-serif; }
 a    { cursor: pointer; }
 
 /* Page Layout */
+h1 { text-align: center; margin: 0; }
+h1 img { width: 406px; height: 94px; }
 section {
   max-width: 622px;
   border-top: 1px solid #DBDBDC;
@@ -15,15 +24,23 @@ section .chevron { width: 28px; height: 11px; cursor: pointer; background: url(/
 section .chevron.down { background-image: url(/chevronDown.png); }
 
 /* Post */
-.day .title { position: relative; }
+.day h2 { color: #94796E; font-size: 24px; text-align: center;}
 .day img { width: 100%; }
 .day .quotes  { background: white; }
-.day blockquote { margin: 0; padding: 0.5em; }
+.day blockquote { color: #94796E; }
 
 @media only screen and (min-width: 769px) {
+  h1 { padding: 34px 0 38px; }
   section { margin: 0 auto; }
-
-
+  header  { position: relative; }
+  header .item  { position: absolute; text-decoration: none; color: #07070D; font-size: 30px; }
+  header .top   { top: 38px; }
+  header .left  { left: 48px; }
+  header .right { right: 44px; }
+  header .bottom { bottom: 32px; }
+  .day blockquote { margin: 0 auto; max-width: 550px; padding-top: 42px; background: url(/neilIcon.png) no-repeat left top; }
+  .day blockquote.santi { background-image: url(/santiIcon.png); }
+  blockquote p:first-child { margin-top: 0; }
   .hero      { position: fixed; bottom: 0; left: 0; width: 20%; }
   .hero.neil { left: auto; right: 0; }
 }

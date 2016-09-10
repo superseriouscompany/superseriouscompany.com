@@ -5,7 +5,7 @@
     <title>Super Serious Company</title>
     <meta property="description" content="Pithy, Poignant Tagline."/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
 
     <meta property="og:url"         content="http://superseriouscompany.com" />
     <meta property="og:title"       content="Super Serious Company" />
@@ -14,15 +14,15 @@
   </head>
   <body>
     <header>
-      <a href="/">Major Progress!</a>
-      <a href="/ideas">Good Ideas!</a>
       <h1>
         <a href="/">
-          <img src="" alt="Super Serious Company"/>
+          <img src="/logo.jpg" alt="Super Serious Company"/>
         </a>
       </h1>
-      <a href="/wheredeyatdoe">Epic Location!</a>
-      <a href="/philosophy">Absolute Madness!</a>
+      <a href="/" class="top left item">Major Progress!</a>
+      <a href="/ideas" class="bottom left item">Good Ideas!</a>
+      <a href="/wheredeyatdoe" class="top right item">Epic Location!</a>
+      <a href="/philosophy" class="bottom right item">Absolute Madness!</a>
     </header>
 
     <section>
@@ -35,9 +35,7 @@
           <h2>
             {{portugueseTitle}} ({{englishTitle}})
           </h2>
-          <div class="title">
-            <img src="{{imageUrl}}"/>
-          </div>
+          <img src="{{imageUrl}}"/>
           <div class="quotes">
             <blockquote class="santi">
               {{{santi}}}

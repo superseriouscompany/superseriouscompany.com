@@ -9,4 +9,5 @@
 
     $ npm install
     $ npm run dev
+    $ npm run devServer
     $ open localhost:3000
