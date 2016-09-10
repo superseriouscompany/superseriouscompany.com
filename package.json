@@ -7,7 +7,8 @@
     "test": "node_modules/.bin/mocha",
     "dev": "node_modules/.bin/nodemon -e js,html server.js",
     "pack": "node_modules/.bin/webpack",
-    "start": "node server.js"
+    "start": "node server.js",
+    "devServer": "node_modules/.bin/webpack-dev-server"
   },
   "repository": {
     "type": "git",

@@ -1,10 +1,25 @@
+var path = require('path');
+
+var assetPath = path.resolve(__dirname, 'dist');
+
+// Set default webpack config for all environments
 var config = {
-  entry: './src/app.js',
+  entry: {
+    app: ['./src/app.js']
+  },
   output: {
-    'path': './dist',
-    'filename': 'app.bundle.js',
-    'publicPath': '/assets/'
+    path:       assetPath,
+    publicPath: '/assets/',
+    filename:   'bundle.js',
   }
+}
+
+// Set specific options for development
+if( !process.env.NODE_ENV || process.env.NODE_ENV == 'development' ) {
+  config.devServer = {
+    inline:      true,      // don't use iframe because we want to proxy requests
+    contentBase: assetPath, // specify content base without needing command line options
+  };
 }
 
 module.exports = config;
