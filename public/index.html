@@ -13,30 +13,48 @@
     <meta property="og:image"       content="https://cldup.com/Kl5WvoFCg9.jpg" />
   </head>
   <body>
+    <header>
+      <a href="/">Major Progress!</a>
+      <a href="/ideas">Good Ideas!</a>
+      <h1>
+        <a href="/">
+          <img src="" alt="Super Serious Company"/>
+        </a>
+      </h1>
+      <a href="/wheredeyatdoe">Epic Location!</a>
+      <a href="/philosophy">Absolute Madness!</a>
+    </header>
+
     <section>
+      <div class="chevrons">
+        <a class="chevron down" title="Go to top of page"></a>
+        <a class="chevron up" title="Go to bottom of page"></a>
+      </div>
       {{#days}}
         <article class="day">
+          <h2>
+            {{portugueseTitle}} ({{englishTitle}})
+          </h2>
           <div class="title">
             <img src="{{imageUrl}}"/>
-            <h2>
-              {{portugueseTitle}}
-              <small>({{englishSubtitle}})</small>
-            </h2>
           </div>
           <div class="quotes">
             <blockquote class="santi">
-              <p><strong>Santi:</strong></p>
               {{{santi}}}
             </blockquote>
 
             <blockquote class="neil">
-              <p><strong>Neil:</strong></p>
               {{{neil}}}
             </blockquote>
           </div>
         </article>
       {{/days}}
     </section>
+
+    <footer>
+      <img class="santi hero" src="/santiHero.jpg" />
+      <img class="neil hero"  src="/neilHero.jpg" />
+    </footer>
 
     <script src="http://localhost:8080/assets/bundle.js"></script>
     <script>

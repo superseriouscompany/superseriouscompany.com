@@ -11,8 +11,8 @@ client.connect('mongodb://heroku_n41dvcxp:tps295d6qk3aogkbqmrttluccn@ds029106.ml
     collection.insertMany([
       {
         imageUrl: 'https://cldup.com/d_Q5Jnt466.jpg',
-        portuguese_title: 'Dia Um',
-        english_title: 'Day One',
+        portugueseTitle: 'Dia Um',
+        englishTitle: 'Day One',
         santi: `
           <p>
             Today, the big tuna and the little tuna woke up in Portugal (I'm the big tuna).
@@ -35,8 +35,8 @@ client.connect('mongodb://heroku_n41dvcxp:tps295d6qk3aogkbqmrttluccn@ds029106.ml
       },
       {
         imageUrl: 'https://cldup.com/3GxrSJdh1L.jpg',
-        portuguese_title: 'Dia Dois',
-        english_title: 'Day Two',
+        portugueseTitle: 'Dia Dois',
+        englishTitle: 'Day Two',
         santi: `
           <p>
             Neil's sad, because we're pretty much fucked.
