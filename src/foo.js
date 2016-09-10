@@ -1,3 +1,4 @@
 module.exports = {
-  cool: 'nice'
+  cool: 'nice',
+  good: 'great'
 }
