@@ -16,67 +16,43 @@ client.connect(mongoUrl, function(err, db) {
 
   var collection = db.collection('days');
 
-  var days = [
-    {
-      day: 1,
-      imageUrl: 'https://cldup.com/UZJWVxXKjK.png',
-      portugueseTitle: 'Dia Um',
-      englishSubtitle: 'Day One',
-      santi: `<p>
-      Today, the big tuna and the little tuna woke up in Portugal (I'm the big tuna).
-      This here's a holy place: the only country on the planet to provide low living costs, fast internet speeds, AND epic surf.
-      Here, we plan on building a business that will finally make us rich and famous – behold Super Serious Company.
-      We thought it wise to start by writing down our ten-, five-, and one-year goals.
-      </p>`,
-      neil: `<p>
-      We did long term goal setting and Santi and I are aligned in our visions of grandiose and eccentric lives, except my 10 year goal list has “Kids” and his 5 year goal list has “No Kids.”
-      </p>
-      <p>
-      Our weekly food budget is 60 euros each. I spent 46 euros today and I ate more than half my food already and I am panicking.
-      </p>
-      <p>
-      While I was making dinner, Santi inexplicably put his fuck playlist on the big jambox.
-      </p>`,
-    }
-  ]
+  collection.find({}).toArray(function(err, days) {
+    if( err ) { throw err; }
 
-  app.get('/', function(req, res) {
-    var html = mustache.render(template, {days: days});
-    res.send(html);
-  })
-
-  app.get('/biden', function(req, res) {
-    res.send(adminTemplate);
-  })
-
-  app.post('/days', bodyParser.urlencoded({extended: false}), function(req, res, next) {
-    collection.insert(req.body, function(err, ok) {
-      if( err ) { return next(err); }
-
-      res.json(req.body);
+    app.get('/', function(req, res) {
+      var html = mustache.render(template, {days: days});
+      res.send(html);
     })
-  })
 
-  app.get('/days', function(req, res, next) {
-    collection.find({}).toArray(function(err, days) {
-      if( err ) { return next(err); }
+    app.get('/biden', function(req, res) {
+      res.send(adminTemplate);
+    })
 
+    app.post('/days', bodyParser.urlencoded({extended: false}), function(req, res, next) {
+      collection.insert(req.body, function(err, ok) {
+        if( err ) { return next(err); }
+
+        res.json(req.body);
+      })
+    })
+
+    app.get('/days', function(req, res, next) {
       res.json({days: days});
     })
-  })
 
-  app.use(function errorHandler(err, req, res, next) {
-    console.error('Internal Server Error', err, err.stack);
-    res.status(500).json({error: 'An unexpected error occured.'})
-  })
+    app.use(function errorHandler(err, req, res, next) {
+      console.error('Internal Server Error', err, err.stack);
+      res.status(500).json({error: 'An unexpected error occured.'})
+    })
 
-  process.on('uncaughtException', function(err) {
-    console.error('Failed to catch exception', err, err.stack);
-    process.exit(0);
-  });
+    process.on('uncaughtException', function(err) {
+      console.error('Failed to catch exception', err, err.stack);
+      process.exit(0);
+    });
 
-  app.listen(port, function(err) {
-    if( err ) { throw err; }
-    console.log(`Listening on ${port}...`);
+    app.listen(port, function(err) {
+      if( err ) { throw err; }
+      console.log(`Listening on ${port}...`);
+    })
   })
 })
