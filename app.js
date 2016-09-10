@@ -49,29 +49,31 @@ client.connect(mongoUrl, function(err, db) {
     res.send(adminTemplate);
   })
 
-  app.post('/days', bodyParser.urlencoded({extended: false}), function(req, res) {
+  app.post('/days', bodyParser.urlencoded({extended: false}), function(req, res, next) {
     collection.insert(req.body, function(err, ok) {
-      if( err ) {
-        console.error(err);
-        return res.status(500).json({err: err});
-      }
+      if( err ) { return next(err); }
 
       res.json(req.body);
     })
   })
 
-  app.get('/days', function(req, res) {
+  app.get('/days', function(req, res, next) {
     collection.find({}).toArray(function(err, days) {
-      if( err ) {
-        console.error(err);
-        return res.status(500).json({err: err});
-      }
-
-      console.log(days);
+      if( err ) { return next(err); }
 
       res.json({days: days});
     })
   })
+
+  app.use(function errorHandler(err, req, res, next) {
+    console.error('Internal Server Error', err, err.stack);
+    res.status(500).json({error: 'An unexpected error occured.'})
+  })
+
+  process.on('uncaughtException', function(err) {
+    console.error('Failed to catch exception', err, err.stack);
+    process.exit(0);
+  });
 
   app.listen(port, function(err) {
     if( err ) { throw err; }
