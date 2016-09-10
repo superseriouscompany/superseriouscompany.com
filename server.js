@@ -40,6 +40,9 @@ client.connect(mongoUrl, function(err, db) {
       res.json({days: days});
     })
 
+    app.use(express.static('dist'));
+    app.use(express.static('public'));
+
     app.use(function errorHandler(err, req, res, next) {
       console.error('Internal Server Error', err, err.stack);
       res.status(500).json({error: 'An unexpected error occured.'})
