@@ -1,4 +1,5 @@
-var foo = require('./foo.js');
+require('./styles.css');
 
+var foo = require('./foo.js');
 document && document.write(JSON.stringify(foo));
 console.log(foo);
