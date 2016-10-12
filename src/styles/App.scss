@@ -1,0 +1,188 @@
+/*
+  All stylesheets have quirks. These are the quirks of this one:
+
+  * mobile is the main target. media queries are used for special desktop rules.
+  * rules are kept to one line, which favors overall structure readability over changing a single rule (use cmd+f).
+  * the goal is to keep the design minimal and stick to this file, but logical sections are broken out in case we need to extract into multiple files.
+  * we're not using SMACSS or any other framework. the idea is to keep the design simple enough that this one file remains readable.
+  * rules go in order of specificity: globals, reusable components, page specific
+*/
+$headerHeight: 58px;
+$desktopHeaderHeight: 60px;
+$greyLine: 1px solid #DBDBDC;
+$accentBrown: #C69785;
+$linkColor: #40746E;
+$contextGrey: #838386;
+
+@mixin absCenter() { position: absolute; left: 0; right: 0; bottom: 0; top: 0; margin: auto; }
+@mixin desktop() {
+  @media only screen and (min-width: 769px) { @content }
+}
+
+/* Globals */
+*    { box-sizing: border-box; }
+body { font-family: 'Questrial', Helvetica, sans-serif; visibility: visible; padding-top: $headerHeight; background: white; }
+a    { cursor: pointer; }
+.desktop-only { display: none !important; }
+  @include desktop {
+    body { padding-top: $desktopHeaderHeight; }
+    .mobile-only { display: none !important; }
+    .desktop-only { display: block !important; &img, &span, &a { display: inline !important} }
+  }
+.js-chrome-only { display: none; }
+
+/* Page Layout */
+h1              { text-align: center; margin: 0; padding-top: 11px; line-height: 18px; font-size: 18px; }
+h1.singleLine   { padding-top: 19px; }
+h1 img          { width: 141px; }
+section         { border-top: $greyLine; font-size: 16px; line-height: 20px; }
+section.context { color: $contextGrey; padding: 0 20px; text-align: center; border-top: 0; }
+.hero           { display: none; }
+.nightshade     { opacity: 0.8; background-color: black; position: fixed; left: 0; top: 0; bottom: 0; right: 0; display: none; }
+body.hamburgerOpen .nightshade { display: block; }
+body.hamburgerOpen .menu       { display: block; }
+  @include desktop {
+    body { padding-top: $desktopHeaderHeight; }
+    h1 { padding: 14px 0 14px; display: inline-block; position: relative; z-index: 11;}
+    h1 img { width: 134px; }
+    h1.singleLine   { padding-top: 14px; }
+    section { margin: 0 auto; max-width: 550px; border: 0; font-size: 18px; }
+    section.context { font-size: 16px; max-width: none; line-height: 20px; text-align: center; padding-bottom: 15px; }
+    section.context p { margin: 15px auto 0; max-width: 600px; }
+    .hero      { position: fixed; bottom: 0; left: 0; width: 15%; display: inline; z-index: -1; }
+    .hero.neil { left: auto; right: 0; }
+  }
+
+/* Header */
+header { position: fixed; top: 0; width: 100%; z-index: 10; background-color: white; height: $headerHeight; border-bottom: $greyLine; }
+header .hamburger { position:absolute; right: 18px; top: 18px; width: 29px; height: 20px; cursor: pointer; }
+header .smallLogo { position: absolute; left: 15px; top: 12px; width: 58px; }
+header .menu { display: none; position: absolute; top: $headerHeight + 9px; right: 9px; width: 66%; background-color: white; border-radius: 10px; padding: 3px 0; }
+header .item { display: block; text-align: center; text-decoration: none; color: #07070D; padding: 16px 0; text-transform: uppercase; border-top: $greyLine; }
+header .item:first-child { border-top: 0; }
+header .item.active { color: $accentBrown; }
+header .pageHeading { text-transform: uppercase; display: inline-block; margin-top: 3px; }
+header.withHeading .logoLink { display: none; }
+  @include desktop {
+    header  { position: fixed; width: 100%; background-color: white; top: 0; height: $desktopHeaderHeight; border-bottom: $greyLine; text-align: center; }
+    header.withHeading .logoLink { display: inline; }
+    header.withHeading .smallLogoLink { display: none; }
+    header.withHeading .pageHeading { display: none; }
+    header .hamburger { display: none; }
+    header .menu { top: 18px; width: 100%; background-color: transparent; border-radius: 0; display: block; }
+    header .item  { position: absolute; font-size: 16px; display: block; padding: 0; border-top: 0; color: $contextGrey; text-transform: none; width: 140px; }
+    header .item.active { border: 4px solid $accentBrown; border-width: 0 0 4px 0; padding-bottom: 16px; }
+    header .top   { top: 37px; }
+    header .left  { left: 0; position: static; float: left; margin-left: 15px;}
+    header .right { right: 0; position: static; float: right; margin-right: 15px;}
+    header .bottom { bottom: 47px; }
+  }
+
+/* Post on homepage or project page */
+.day { border-top: $greyLine; padding: 2em 0 1.4em; &:first-child { border-top: 0; } }
+.day h2 { color: #94796E; font-size: 24px; text-align: center; margin: 0; margin-top: -15px; padding-bottom: 15px; }
+.day img.comic { width: 100%; border-left: 4px solid $accentBrown; }
+  @include desktop {
+    .day { padding-top: 1em; border: none; }
+    .day img.comic { border: 0;  margin-bottom: 10px; }
+    .day h2 { display: none; }
+  }
+
+/* Quotes on homepage, project page and philosophy page*/
+.quotes  { background: white; }
+.quotes blockquote { color: #94796E; line-height: 20px; margin: 2px 0 0 0; background: url(asset-path('santiSideIcon.jpg')) no-repeat left 2px; background-size: 37px 45px; padding-left: 37px+15px; padding-right: 15px; font-size: 16px; min-height: 45px; }
+.quotes blockquote.neil { background-image: url(asset-path('neilSideIcon.jpg')); background-size: 37px 45px; }
+.quotes blockquote .chatBubble { display: none; }
+  @include desktop {
+    .quotes { width: 520px; margin: 0 auto 4em; }
+    .quotes blockquote:first-child { margin-bottom: 1.2em; }
+    .quotes blockquote { margin: 0; max-width: 480px; padding: 1.2em; background: none; border: 1px solid #DBDBDC; position: relative; font-size: 16px; min-height: 0; border-radius: 18px; }
+    .quotes blockquote p { margin: 0; }
+    .quotes blockquote.neil { display: absolute; background: none; right: -40px; }
+    .quotes blockquote .chatBubble { display: block; width: 34px; position: absolute; bottom: -23px; left: 15px; z-index: 2; }
+    .quotes blockquote.neil .chatBubble { left: auto; right: 15px; transform: scaleX(-1); }
+    .quotes blockquote p:first-child { margin-top: 0; }
+  }
+
+/* Social section on homepage */
+section.social { padding: 21px 0 35px; }
+section.social p { color: $contextGrey; text-align: center; margin-top: 0; }
+section.social .icons { display: flex; width: 262px; margin: 0 auto; }
+section.social a { display: inline-block; width: 33%; text-align: center; }
+section.social img { width: 65px; }
+  @include desktop {
+    section.social { padding: 0 0 3em;}
+    section.social .icons { width: 232px; }
+    section.social img { width: 55px; }
+  }
+
+/* Homepage */
+body.pages-home .day { padding-bottom: 0; }
+body.pages-home .readMore { text-align: center; margin: 2em 0; }
+body.pages-home .readMore { a, a:visited, a:active { color: $linkColor; } }
+  @include desktop {
+    body.pages-home section.story p:last-child { margin-bottom: 0; }
+    body.pages-home .readMore { margin: 2.2em 0 0; padding: 0 0 1em; border: 0; font-size: 16px; }
+  }
+
+/* Philosophy Page */
+.philosophy blockquote { border-bottom: $greyLine; padding-top: 15px; padding-bottom: 15px; }
+  @include desktop {
+    .philosophy blockquote { margin-bottom: 1.2em; }
+  }
+
+/* Ideas Page */
+.ideas .submission { background: url(asset-path('ideaBg.jpg')) no-repeat; background-size: cover; height: 239px; position: relative; }
+.ideas .inputContainer { position:absolute; bottom: 28px; right: 22px; left: 22px; }
+.ideas input[type=text] { width: 100%; padding: 15px 50px 15px 12px; font-size: 16px; border: 0; box-shadow: none; }
+.ideas button { width: 27px; height: 27px; background: url(asset-path('submitCircle.jpg')) left top; background-size: 100%; border: 0; cursor: pointer; position: absolute; top: 11px; right: 11px; padding: 0; }
+.ideas .submittable button { background-position: left bottom; }
+.ideas .step2 { display: none; }
+.ideas input[type=submit] { visibility: hidden; }
+.ideas .idea { padding: 15px 27px; border: $greyLine; border-width: 0 0 1px 0; color: $contextGrey; }
+.ideas .dialog { border-radius: 8px; background-color: white; text-align: center; font-size: 18px; @include absCenter; }
+.ideas .success { color: #98D159; padding: 22px 32px; width: 144px; height: 119px; }
+.ideas .success img { width: 50px; display: block; margin: 0 auto 9px; }
+.ideas .failure { color: #D17059; width: 226px; height: 139px; padding: 28px 34px;}
+.ideas .failure a { position: absolute; bottom: 0; right: 0; left: 0; background-color: #D17059; color: #fff; text-decoration: center; padding: 11px 0 14px; border-radius: 0 0 8px 8px; text-decoration: none; }
+  @include desktop {
+    .ideas { padding-bottom: 2em; }
+    .ideas .submission { height: 319px; margin: 1.35em 0 2em; border-radius: 28px; }
+    .ideas .idea:first-of-type { border-top-width: 1px; }
+    .ideas .inputContainer { left: 71px; right: 71px; }
+  }
+
+
+/* Our House Page */
+section.house { font-size: 16px; color: $contextGrey; padding-bottom: 1.4em; }
+section.house img { width: 100%; }
+section.house p { margin: 20px 22px; &:first-child { margin-left: 100px; margin-right: 100px; } }
+  @include desktop {
+    section.house img { margin-top: 1.5em; }
+  }
+
+/* Projects Page */
+body.projects-show .context { text-align: left; padding: 0 2em; line-height: 20px; }
+body.projects-show .link { text-align: center; margin: 1em 0 1.3em; }
+body.projects-show .link { a, a:active, a:visited { color: $linkColor; } }
+  @include desktop {
+    body.projects-show .context { text-align: center; }
+  }
+
+/* Story Page */
+  @include desktop {
+    a.subscribe { color: $linkColor; text-decoration: underline; }
+  }
+
+/* Progress Updates */
+.projects-show section { border: 0; font-size: 16px; }
+.progressUpdate { border-top: $greyLine; }
+.progressUpdate h2 { text-align: center; color: #94796E; padding: .1em 0 .12em 0; }
+.progressUpdate img { width: 100%; }
+.progressUpdate .description { padding: .5em 2em .75em; color: $contextGrey; }
+  @include desktop {
+    .projects-show section.context p { display: none; }
+    .progressUpdate { border: 0; }
+    .progressUpdate h2 { text-align: left; font-size: 18px; padding: .1em 0 .12em 1em; }
+    .progressUpdate .description { padding: .5em 1em 1.5em; }
+  }
