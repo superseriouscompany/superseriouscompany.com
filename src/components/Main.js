@@ -1,21 +1,27 @@
+'use strict';
+
 require('normalize.css/normalize.css');
 require('styles/App.scss');
 
 import React from 'react';
 
-let yeomanImage = require('../images/yeoman.png');
+import Header from './Header';
+import Footer from './Footer';
+import Page   from './Page';
 
 class AppComponent extends React.Component {
   render() {
     return (
-      <div className="index">
-        Hello World.
-      </div>
+
+<div>
+  <Header />
+  <Page />
+  <Footer />
+</div>
+
+
     );
   }
 }
-
-AppComponent.defaultProps = {
-};
 
 export default AppComponent;
